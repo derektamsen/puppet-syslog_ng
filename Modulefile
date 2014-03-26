@@ -1,5 +1,5 @@
 name          'dtamsen-syslog_ng'
-version       '0.0.1'
+version       '0.0.2'
 summary       'This module manages syslog-ng'
 description   'This module manages syslog-ng.
 There are two main pieces:  client and server
