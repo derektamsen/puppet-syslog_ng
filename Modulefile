@@ -1,2 +1,2 @@
-name    'ghoneycutt-syslog_ng'
-version '1.0.0'
+name    'dtamsen-syslog_ng'
+version '0.0.1'

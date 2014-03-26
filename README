@@ -1,6 +1,7 @@
 syslog_ng
 
 Released 20100702 - Garrett Honeycutt - GPLv2
+Forked 20140326 - Derek Tamsen - GPLv2
 
 # This module manages syslog-ng
 # 
