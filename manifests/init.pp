@@ -11,26 +11,26 @@
 #
 class syslog_ng {
 
-    package { "syslog-ng": 
-        require => Exec["remove sysklogd"],
+    package { 'syslog-ng': 
+        require => Exec['remove sysklogd'],
     } # package
 
-    service { "syslog-ng":
+    service { 'syslog-ng':
         enable  => true,
         ensure  => running,
-        require => Package["syslog-ng"],
+        require => Package['syslog-ng'],
     } # service
 
-    File { require => Package["syslog-ng"] }
+    File { require => Package['syslog-ng'] }
 
-    file { "/etc/syslog-ng":
+    file { '/etc/syslog-ng':
         ensure => directory,
-        mode   => "755";
+        mode   => '755';
     } # file
 
-    exec { "remove sysklogd":
-        command => "rpm -e --nodeps sysklogd",
-        onlyif  => "rpm -q sysklogd",
+    exec { 'remove sysklogd':
+        command => 'rpm -e --nodeps sysklogd',
+        onlyif  => 'rpm -q sysklogd',
     } # exec
     
 } # class syslog_ng
