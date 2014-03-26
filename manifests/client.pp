@@ -3,7 +3,7 @@
 # All hosts are clients - included by generic module
 #
 # Requires:
-#   $logServerList must be set in site manifest
+#   $logserverlist must be set in site manifest
 #
 class syslog_ng::client inherits syslog_ng {
 
