@@ -25,7 +25,7 @@ class syslog_ng {
 
     file { '/etc/syslog-ng':
         ensure => directory,
-        mode   => '755';
+        mode   => '0755';
     } # file
 
     exec { 'remove sysklogd':

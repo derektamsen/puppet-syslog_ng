@@ -11,7 +11,7 @@ class syslog_ng::server inherits syslog_ng {
             source => 'puppet:///modules/syslog_ng/syslog-ng.conf.server';
         '/var/log/HOSTS':
             ensure => directory,
-            mode   => '755';
+            mode   => '0755';
     } # file
 
     cron { 'compress-logfiles':
