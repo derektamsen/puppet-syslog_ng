@@ -5,7 +5,7 @@
 class syslog_ng::server inherits syslog_ng {
 
     file {
-         '/etc/syslog-ng/syslog-ng.conf':
+        '/etc/syslog-ng/syslog-ng.conf':
             ensure => present,
             notify => Service['syslog-ng'],
             source => 'puppet:///modules/syslog_ng/syslog-ng.conf.server';
