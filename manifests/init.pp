@@ -16,8 +16,8 @@ class syslog_ng {
     } # package
 
     service { 'syslog-ng':
-        enable  => true,
         ensure  => running,
+        enable  => true,
         require => Package['syslog-ng'],
     } # service
 
