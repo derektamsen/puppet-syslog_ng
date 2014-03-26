@@ -11,7 +11,7 @@
 #
 class syslog_ng {
 
-    package { 'syslog-ng': 
+    package { 'syslog-ng':
         require => Exec['remove sysklogd'],
     } # package
 

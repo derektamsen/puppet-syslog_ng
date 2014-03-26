@@ -7,7 +7,7 @@
 #
 class syslog_ng::client inherits syslog_ng {
 
-    file { 
+    file {
         '/etc/syslog-ng/syslog-ng.conf':
             notify  => Service['syslog-ng'],
             content => template('syslog_ng/syslog-ng.conf.client.erb');
