@@ -1,12 +1,17 @@
 # This file is being maintained by Puppet.
 # DO NOT EDIT
 
+@version:3.5
+
+# syslog-ng configuration file.
 #
-# syslog-ng server configuration:
-#  
-#  starting point copied from
-#  http://www.unix.com/sun-solaris/55925-syslog-ng-conf.html
+# This should behave pretty much like the original syslog on RedHat. But
+# it could be configured a lot smarter.
 #
+# See syslog-ng(8) and syslog-ng.conf(5) for more information.
+#
+# Note: it also sources additional configuration files (*.conf)
+#       located in /etc/syslog-ng/conf.d/
 
 options {
     sync (0);
@@ -24,19 +29,16 @@ options {
         use_fqdn (no);
 };
 
-#
-# local logging for myself
-#
 source s_sys {
-        file ("/proc/kmsg" log_prefix("kernel: "));
-        unix-stream ("/dev/log");
-        internal();
+    file ("/proc/kmsg" program_override("kernel") flags(kernel));
+    unix-dgram ("/dev/log");
+    internal();
 };
 
 destination d_cons { file("/dev/console"); };
 destination d_mesg { file("/var/log/messages"); };
 destination d_auth { file("/var/log/secure"); };
-destination d_mail { file("/var/log/maillog" sync(10)); };
+destination d_mail { file("/var/log/maillog" flush_lines(10)); };
 destination d_spol { file("/var/log/spooler"); };
 destination d_boot { file("/var/log/boot.log"); };
 destination d_cron { file("/var/log/cron"); };
@@ -57,7 +59,6 @@ filter f_news       { facility(uucp) or
 filter f_boot   { facility(local7); };
 filter f_cron   { facility(cron); };
 
-
 #log { source(s_sys); filter(f_kernel); destination(d_cons); };
 log { source(s_sys); filter(f_kernel); destination(d_kern); };
 log { source(s_sys); filter(f_default); destination(d_mesg); };
@@ -77,3 +78,9 @@ log { source(s_sys); destination(d_clients); };
 source s_remote { udp(ip(0.0.0.0) port(514)); };
 destination d_clients       { file("/var/log/HOSTS/$R_YEAR/$R_MONTH/$R_DAY/$HOST/$FACILITY"); };
 log { source(s_remote); destination(d_clients); };
+
+# Source additional configuration files (.conf extension only)
+@include "/etc/syslog-ng/conf.d/*.conf"
+
+
+# vim:ft=syslog-ng:ai:si:ts=4:sw=4:et:
