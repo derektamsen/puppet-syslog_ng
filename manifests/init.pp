@@ -31,6 +31,7 @@ class syslog_ng {
     exec { 'remove sysklogd':
         command => 'rpm -e --nodeps sysklogd',
         onlyif  => 'rpm -q sysklogd',
+        provider => 'shell';
     } # exec
     
 } # class syslog_ng
